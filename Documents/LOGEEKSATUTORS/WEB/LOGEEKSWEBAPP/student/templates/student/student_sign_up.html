@@ -1,0 +1,79 @@
+{% extends 'student/default_template.html' %}
+
+{% block title %}Student Sign-up{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h2 class="text-center" style=""><strong>Student Sign-up</strong></h2>
+            </div>
+            <div class="panel-body">
+                <br>
+                <div class="alert alert-info">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <h4 class="text-center">
+                        Your Student-id (username) will be sent to your email. Be sure to
+                        provide your working email address.
+                    </h4>
+                </div>
+                <br>
+                <div class="row">
+                    <form name="student sign_up form" method="POST" action="/student/sign_up/">
+                        {% csrf_token %}
+                        <div class="col-sm-5 col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-1">
+                            <legend>Basic Info</legend>
+                            <label for="email">Email</label>
+                            <br>
+                            <input class="form-control" type="email" id="email" name="email" placeholder="username@domain.com" required>
+                            <br>
+                            <label for="password">Create your Password <span style="color: orangered">(8 Characters or more)</span></label>
+                            <br>
+                            <input class="form-control" minlength="8" type="password" id="password" name="password" required>
+                            <br>
+                            <label for="first_name">First Name</label>
+                            <br>
+                            <input class="form-control" type="text" id="first_name" name="first_name"required>
+                            <br>
+                            <label for="middle_name">Middle Name</label>
+                            <br>
+                            <input class="form-control" type="text" id="middle_name" name="middle_name" required>
+                            <br>
+                            <label for="last_name">Last Name</label>
+                            <br>
+                            <input class="form-control" type="text" id="last_name" name="last_name" required>
+                            <br><br>
+                        </div>
+                        <div class="col-sm-5 col-sm-offset-1 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2">
+                            <legend>Others</legend>
+                            <label for="gender">Gender</label>
+                            <br>
+                            <select class="form-control" id="gender" name="gender" required>
+                                <option value="">Select an option</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                            <br>
+                            <label for="phone_number">Phone Number</label>
+                            <br>
+                            <input class="form-control" type="tel" name="phone_number" id="phone_number" required>
+                            <br>
+                            <label for="address">Home Address</label>
+                            <br>
+                            <input class="form-control" type="text" id="address" name="address" required>
+                            <br>
+                            <label for="photo">Profile Photo</label>
+                            <br>
+                            <input class="form-control file-upload" type="file" name="photo" id="photo">
+                            <br>
+                            <br>
+                            <input class="btn btn-success" type="submit" value="Sign-up" id="sign_up" name="sign_up">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="panel-footer"></div>
+        </div>
+    </div>
+{% endblock %}

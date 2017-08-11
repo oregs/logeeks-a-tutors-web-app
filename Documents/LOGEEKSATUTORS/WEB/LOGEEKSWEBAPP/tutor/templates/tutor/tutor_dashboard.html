@@ -1,0 +1,36 @@
+{% extends "tutor/default_template.html" %}
+
+{% block title %}Tutor {{ user }}{% endblock %}
+
+{% block content %}
+    {% load cropping %}
+    {% load thumbnail %}
+    <h2>Tutor {{ user.username }}</h2>
+    <div class="thumbnail" style="width: 10em">
+        <img src="{% thumbnail tutor.photo 300x300 box=tutor.cropping crop detail %}" class="img-responsive img-thumbnail">
+    </div>
+    <h3>Current Worth: <b>N{{ tutor.charge }}</b>/hour</h3>
+    <div class="thumbnail">
+        <a class="btn btn-primary btn-sm" href="/tutor/tutor_change_password/">Change my Password</a>
+        <a class="btn btn-primary btn-sm" href="/tutor/profile/">Edit Profile</a>
+        <a class="btn btn-primary btn-sm" href="/tutor/transaction/archive/">Transactions</a>
+        {% if tutor.is_visible %}
+            <div class="btn-group">
+                <button class="btn btn-default btn-sm active">Visibility</button>
+                <button class="btn btn-success btn-sm active">ON</button>
+            </div>
+        {% else %}
+            <div class="btn-group">
+                <button class="btn btn-default btn-sm disabled">Visibility</button>
+                <button class="btn btn-danger btn-sm disabled">OFF</button>
+            </div>
+        {% endif %}
+
+        <br><br>
+        <form method="POST" action="{% url 'tutor:tutor_sign_out' %}">
+            {% csrf_token %}
+            <input class="btn btn-danger" type="submit" value="Logout" id="sign_out" name="sign_out">
+        </form>
+    </div>
+
+{% endblock %}

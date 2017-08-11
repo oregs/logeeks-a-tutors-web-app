@@ -1,0 +1,23 @@
+{% extends "student/default_template.html" %}
+
+{% block title %}Student {{ user }}{% endblock %}
+
+{% block content %}
+    <h2>Student {{ user.username }}</h2>
+    <div class="thumbnail" style="width: 10%">
+        <img src="{{ student_photo }}" class="img-responsive img-thumbnail">
+    </div>
+    <div class="thumbnail">
+        <a class="btn btn-primary btn-sm" href="/student/student_change_password/">Change Password</a>
+        <a class="btn btn-primary btn-sm" href="/student/profile/">Profile</a>
+        <a class="btn btn-primary btn-sm" href="/student/transaction/archive/">Transactions</a>
+        <a class="btn btn-primary btn-sm" href="/student/hire_tutor/">Hire Tutor</a>
+
+        <br><br>
+        <form method="POST" action="{% url 'student:student_sign_out' %}">
+            {% csrf_token %}
+            <input class="btn btn-danger" type="submit" value="Logout" id="sign_out" name="sign_out">
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "student/default_template.html" %}
+
+{% block title %}Student Sign-in{% endblock %}
+
+{% block content %}
+<div class="container" style="width: 84%; padding-left: 8%; padding-right: 8%;">
+    {% if additional_message %}
+        <h2 class="text-center text-warning" >{{ additional_message }}</h2>
+    {% endif %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="text-center">Student Sign-in</h3>
+        </div>
+        <div class="panel-body">
+            <div class="container" style="border: 1px solid cornflowerblue; border-radius: 4px; width: 90%; margin: 20px auto;">
+                <br>
+                {% if error_message %}
+                    <div class="alert alert-warning fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <p>{{error_message}}. Input valid data.</p>
+                    </div>
+
+                {% else %}
+                    <br>
+                {% endif %}
+
+                <form action="{% url 'student:authenticating' %}" method="POST">
+                    {% csrf_token %}
+                    <label for="username"><span><i class="fa fa-user"></i> Username:</span></label><br>
+                    <input class="form-control" type="text" name="username" id="username" maxlength="5" placeholder="Student I.D." required>
+                    <br>
+                    <label for="password"><span><i class="fa fa-lock"></i> Password:</span></label><br>
+                    <input class="form-control" type="password" name="password" id="password" placeholder="Enter password" required>
+                    <br>
+                    <input type="hidden" value="{{ next_url }}" name="next" id="next">
+                    <button class="btn btn-success btn-md" type="submit" name="signIn"><span><i class="fa fa-power-off"></i> Login</span></button>
+                </form>
+                <br>
+                <a class="btn btn-info" href="{% url 'student:student_sign_up' %}">Sign-up</a>
+                <br>
+                {% if error_message %}
+                    <br>
+                    <a class="btn btn-warning" href="{% url 'student:student_password_reset' %}">Reset password</a>
+                {% endif %}
+                <br><br>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
